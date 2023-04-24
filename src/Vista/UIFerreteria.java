@@ -94,6 +94,7 @@ public class UIFerreteria {
     public void menu() {
         int op;
         while (true){
+            System.out.println("");
             System.out.println("***** SISTEMA DE FERRETERIA ***** ");
             System.out.println("\n*** MENÚ PRINCIPAL ***");
             System.out.println("1.- Crear nuevo cliente");
