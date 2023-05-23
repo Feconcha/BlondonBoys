@@ -46,5 +46,12 @@ public class ControladorFerreteria {
         }
         return listaProductos;
     }
+    public void agregaVenta(){
+
+    }
+    public String [][] listaVentas(){
+
+        return listaVentas();
+    }
 
 }
