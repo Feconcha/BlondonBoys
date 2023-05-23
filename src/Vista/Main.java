@@ -5,5 +5,3 @@ public class Main {
         UIFerreteria.getInstance().menu();
     }
 }
-
-//Rael
