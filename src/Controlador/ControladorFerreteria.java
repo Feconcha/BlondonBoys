@@ -46,5 +46,4 @@ public class ControladorFerreteria {
         }
         return listaProductos;
     }
-
 }

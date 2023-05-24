@@ -40,5 +40,4 @@ public class Cliente {
     public String getTelefono() {
         return telefono;
     }
-
 }
