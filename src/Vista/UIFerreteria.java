@@ -3,6 +3,7 @@ package Vista;
 import Controlador.ControladorFerreteria;
 import Modelo.Cliente;
 import Modelo.Producto;
+import Modelo.Venta;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -53,7 +54,6 @@ public class UIFerreteria {
         System.out.println("Ingrese el precio del producto:");
         int precio = scan.nextInt();
         ControladorFerreteria.getInstance().creaProducto(codigo,marca,descripcion,precio);
-
         System.out.println("Producto creado exitosamente.");
     }
     public void CrearVenta(){
@@ -63,7 +63,10 @@ public class UIFerreteria {
         String fechaVenta = scan.next();
         System.out.println("Ingrese el rut del cliente");
         String rutCliente =scan.next();
-
+        System.out.println("Ingrese el codigo del producto");
+        long codProducto = scan.nextLong();
+        ControladorFerreteria.getInstance().agregaVenta(codVenta,fechaVenta,codProducto,rutCliente);
+        System.out.println("Venta creada exitosamente.");
     }
 
     public void ListaClientes() {
@@ -84,9 +87,20 @@ public class UIFerreteria {
         String [] datos;
         String [] listaProductos = ControladorFerreteria.getInstance().listaProductos();
         System.out.println("**** LISTADO DE PRODUCTOS **** ");
-        System.out.printf("%1$-13s%2$-20s%3$-30s%4$-40s%n", "Codigo", "Marca","Descripcion","Precio");
+        System.out.printf("%1$-13s%2$-25s%3$-30s%4$-40s%n", "Codigo", "Marca","Descripcion","Precio");
         for(int i=0; i<listaProductos.length;i++){
             datos = listaProductos[i].split(";");
+            System.out.printf("%1$-13s%2$-25s%3$-30s%4$-40s%n", datos[0], datos[1], datos[2], datos[3]);
+        }
+    }
+    public void ListaVentas(){
+        String [] listaVentas = ControladorFerreteria.getInstance().listaVentas();
+        String [] datos;
+        System.out.println("LISTADO DE VENTAS");
+        System.out.printf("%1$-13s%2$-20s%3$-30s%4$-40s%n", "Codigo de venta", "Rut Cliente","Código producto","Fecha");
+
+        for(int i=0; i< listaVentas.length;i++){
+            datos = listaVentas[i].split(";");
             System.out.printf("%1$-13s%2$-20s%3$-30s%4$-40s%n", datos[0], datos[1], datos[2], datos[3]);
         }
     }
@@ -99,9 +113,11 @@ public class UIFerreteria {
             System.out.println("\n*** MENÚ PRINCIPAL ***");
             System.out.println("1.- Crear nuevo cliente");
             System.out.println("2.- Crear nuevo producto");
-            System.out.println("3.- Listar a todos los clientes");
-            System.out.println("4.- Listar todos los productos");
-            System.out.println("5.- Salir");
+            System.out.println("3.- Crear Venta");
+            System.out.println("4.- Listar a todos los clientes");
+            System.out.println("5.- Listar todos los productos");
+            System.out.println("6.- Listar todas las ventas");
+            System.out.println("7.- Salir");
             System.out.println("Ingrese opción:");
             op = scan.nextInt();
 
@@ -113,15 +129,22 @@ public class UIFerreteria {
                     CrearProducto();
                     break;
                 case 3:
-                    ListaClientes();
+                    CrearVenta();
                     break;
                 case 4:
-                    ListaProductos();
+                    ListaClientes();
                     break;
                 case 5:
-                    System.out.println("Saliendo...");
+                    ListaProductos();
+                    break;
+                case 6:
+                    ListaVentas();
+                case 7:
                     System.exit(1);
                     break;
+                default:
+                    System.out.println("Los datos ingresados son incorrectos");
+
             }
         }
     }
