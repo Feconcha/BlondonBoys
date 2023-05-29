@@ -86,7 +86,7 @@ public class ControladorFerreteria {
         return datosCliente;
     }
     private String[] consultaCodProducto(long codProducto){
-        Producto productos = buscaCodProducto(codProducto);
+        Producto productos = buscaProducto(codProducto);
         String [] datosProductos = new String[4];
         if(productos == null){
             return datosProductos;
