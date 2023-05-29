@@ -1,18 +1,21 @@
 package Modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Venta {
     private long codigoVenta;
-    private String fechaVenta;
-    private ArrayList<Producto> listaProductos;
     private Cliente cliente;
+    private ArrayList<Producto> productos;
+    private LocalDate fechaVenta;
 
-    public Venta(long codigoVenta, String fechaVenta, ArrayList<Producto> listaProductos, Cliente cliente) {
+
+    public Venta(long codigoVenta, LocalDate fechaVenta, Cliente cliente) {
         this.codigoVenta = codigoVenta;
         this.fechaVenta = fechaVenta;
-        this.listaProductos = listaProductos;
         this.cliente = cliente;
+        productos= new ArrayList<>();
     }
 
     public long getCodigoVenta() {
@@ -23,22 +26,6 @@ public class Venta {
         this.codigoVenta = codigoVenta;
     }
 
-    public String getFechaVenta() {
-        return fechaVenta;
-    }
-
-    public void setFechaVenta(String fechaVenta) {
-        this.fechaVenta = fechaVenta;
-    }
-
-    public ArrayList<Producto> getListaProductos() {
-        return listaProductos;
-    }
-
-    public void setListaProductos(ArrayList<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -46,4 +33,23 @@ public class Venta {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public ArrayList<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(ArrayList<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public LocalDate getFechaVenta() {
+        return fechaVenta;
+    }
+
+    public void setFechaVenta(LocalDate fechaVenta) {
+        this.fechaVenta = fechaVenta;
+    }
+
+
+
 }
