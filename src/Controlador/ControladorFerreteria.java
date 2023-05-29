@@ -15,6 +15,7 @@ public class ControladorFerreteria {
     private ControladorFerreteria(){
         Clientes = new ArrayList<>();
         Productos = new ArrayList<>();
+        Ventas = new ArrayList<>();
     }
 
 
@@ -27,8 +28,8 @@ public class ControladorFerreteria {
     public void creaCliente(String rut, String nombre, String direccion, String telefono){
         Clientes.add(new Cliente(rut,nombre,direccion,telefono));
     }
-    public void creaProducto(long codigo, String marca, String descripcion, int precio){
-        Productos.add(new Producto(codigo,marca,descripcion,precio));
+    public void creaProducto(long codigo, String marca, String descripcion, int precio, int stock){
+        Productos.add(new Producto(codigo,marca,descripcion,precio,stock));
     }
     public String[] listaClientes() {
         String [] listaClientes = new String[Clientes.size()];
