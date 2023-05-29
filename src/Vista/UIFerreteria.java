@@ -17,14 +17,12 @@ public class UIFerreteria {
         scan = new Scanner(System.in);
         scan.useDelimiter("[\t|\r\n]+");
     }
-
     public static UIFerreteria getInstance() {
         if (instance == null) {
             instance = new UIFerreteria();
         }
         return instance;
     }
-
     public void CrearCliente() {
 
         System.out.println("Ingrese el rut del cliente");
@@ -41,8 +39,6 @@ public class UIFerreteria {
         controlador.creaCliente(rut,nombre,direccion,telefono);
         System.out.println("Cliente creado exitosamente.");
     }
-
-
     public void CrearProducto() {
         System.out.println("Ingrese el codigo del producto");
         long codigo = scan.nextLong();
@@ -57,19 +53,6 @@ public class UIFerreteria {
         controlador.creaProducto(codigo,marca,descripcion,precio,stock);
         System.out.println("Producto creado exitosamente.");
     }
-    public void ListaVentas() {
-        String [] datos;
-        String [] listaVentas = controlador.listaVentas();
-        System.out.println("**** LISTADO DE VENTAS **** ");
-        System.out.printf("%1$-18s%2$-30s%3$-35s%4$-12s%n", "Rut cliente", "Codigo","Fecha","Cantidad productos");
-        for(int i=0; i<listaVentas.length;i++){
-            datos = listaVentas[i].split(";");
-            System.out.printf("%1$-18s%2$-30s%3$-35s%4$-12s%n", datos[0], datos[1], datos[2], datos[3]);
-        }
-    }
-
-
-
     public void ListaClientes() {
         String [] datos;
         String [] listaClientes = ControladorFerreteria.getInstance().listaClientes();
@@ -83,15 +66,24 @@ public class UIFerreteria {
             System.out.printf("%1$-18s%2$-30s%3$-35s%4$-12s%n", datos[0], datos[1], datos[2], datos[3]);
         }
     }
-
     public void ListaProductos() {
         String [] datos;
         String [] listaProductos = ControladorFerreteria.getInstance().listaProductos();
         System.out.println("**** LISTADO DE PRODUCTOS **** ");
-        System.out.printf("%1$-13s%2$-20s%3$-30s%4$-40s%n", "Codigo", "Marca","Descripcion","Precio");
+        System.out.printf("%1$-13s%2$-20s%3$-30s%4$-30s%4$-40s%n", "Codigo", "Marca","Descripcion","Precio","Stock");
         for(int i=0; i<listaProductos.length;i++){
             datos = listaProductos[i].split(";");
-            System.out.printf("%1$-13s%2$-20s%3$-30s%4$-40s%n", datos[0], datos[1], datos[2], datos[3]);
+            System.out.printf("%1$-13s%2$-20s%3$-30s%4$-30s%4$-40s%n", datos[0], datos[1], datos[2], datos[3],datos[4]);
+        }
+    }
+    public void ListaVentas() {
+        String [] datos;
+        String [] listaVentas = controlador.listaVentas();
+        System.out.println("**** LISTADO DE VENTAS **** ");
+        System.out.printf("%1$-18s%2$-30s%3$-35s%4$-12s%n", "Rut cliente", "Codigo","Fecha","Cantidad productos");
+        for(int i=0; i<listaVentas.length;i++){
+            datos = listaVentas[i].split(";");
+            System.out.printf("%1$-18s%2$-30s%3$-35s%4$-12s%n", datos[0], datos[1], datos[2], datos[3]);
         }
     }
 
