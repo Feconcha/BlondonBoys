@@ -56,17 +56,22 @@ public class UIFerreteria {
         ControladorFerreteria.getInstance().creaProducto(codigo,marca,descripcion,precio);
         System.out.println("Producto creado exitosamente.");
     }
-    public void CrearVenta(){//cambiar, primero se pide rut, fecha, codventa y codproductos (y su cantidad de productos)
-        System.out.println("Ingrese el codigo de la venta");
-        String codVenta = scan.next();
-        System.out.println("Ingrese la fecha de la venta");
-        String fechaVenta = scan.next();
+    public void CrearVenta(){
+        String opcion;
         System.out.println("Ingrese el rut del cliente");
-        String rutCliente =scan.next();
-        System.out.println("Ingrese el codigo del producto");
-        long codProducto = scan.nextLong();
-        ControladorFerreteria.getInstance().agregaVenta(codVenta,fechaVenta,codProducto,rutCliente);
-        System.out.println("Venta creada exitosamente.");
+        String rut = scan.next();
+        Venta venta =controlador.creaVenta(rut);
+        do{
+            System.out.println("Ingrese el código del producto");
+            long codigo = scan.nextLong();
+            if(controlador.añadirVenta(codigo,venta)){
+                System.out.println("¿Quiere comprar mas productos? s/n");
+                opcion = scan.next();
+            }else{
+                System.out.println("No hay stock suficiente para ese producto");
+                opcion= "n";
+            }
+        }while (opcion.equalsIgnoreCase("n"));
     }
     //LISTAS
     public void ListaClientes() {
