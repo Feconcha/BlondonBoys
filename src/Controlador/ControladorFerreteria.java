@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Cliente;
 import Modelo.Producto;
+import Modelo.Venta;
 
 import java.util.ArrayList;
 
@@ -9,6 +10,7 @@ public class ControladorFerreteria {
     private static ControladorFerreteria instance = null;
     private final ArrayList<Cliente> Clientes;
     private final ArrayList<Producto> Productos;
+    private final ArrayList<Venta> Ventas;
 
     private ControladorFerreteria(){
         Clientes = new ArrayList<>();
