@@ -10,14 +10,10 @@ import java.util.Scanner;
 public class UIFerreteria {
 
     private static UIFerreteria instance = null;
-    private final ArrayList<Cliente> Clientes;
-    private final ArrayList<Producto> Productos;
     private final Scanner scan;
 
     private UIFerreteria(){
         scan = new Scanner(System.in);
-        Clientes = new ArrayList<>();
-        Productos = new ArrayList<>();
         scan.useDelimiter("[\t|\r\n]+");
     }
 
