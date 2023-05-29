@@ -83,5 +83,23 @@ public class ControladorFerreteria {
         }
         pop.close();
     }
+    public void readProductos() throws FileNotFoundException{
+        Scanner sc= new Scanner(new File("Productos.txt"));
+        long codigo;
+        String marca,descripcion;
+        int precio;
+        Producto producto;
+        sc.useDelimiter("\r\n|;");
+        sc.useLocale(Locale.UK);
+        while(sc.hasNext()){
+            codigo= sc.nextLong();
+            marca = sc.next();
+            descripcion = sc.next();
+            precio= sc.nextInt();
+            producto= new Producto(codigo,marca,descripcion,precio);
+            Productos.add(producto);
+        }
+        sc.close();
+    }
 
 }
