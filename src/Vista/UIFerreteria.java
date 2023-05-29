@@ -38,7 +38,7 @@ public class UIFerreteria {
 
         System.out.println("Ingrese el número de teléfono del cliente:");
         String telefono = scan.next();
-        ControladorFerreteria.getInstance().creaCliente(rut,nombre,direccion,telefono);
+        controlador.creaCliente(rut,nombre,direccion,telefono);
         System.out.println("Cliente creado exitosamente.");
     }
 
@@ -54,7 +54,7 @@ public class UIFerreteria {
         int precio = scan.nextInt();
         System.out.println("Ingrese el stock del producto");
         int stock = scan.nextInt();
-        ControladorFerreteria.getInstance().creaProducto(codigo,marca,descripcion,precio,stock);
+        controlador.creaProducto(codigo,marca,descripcion,precio,stock);
         System.out.println("Producto creado exitosamente.");
     }
 
