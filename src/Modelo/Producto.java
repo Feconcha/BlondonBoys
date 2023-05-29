@@ -1,10 +1,13 @@
 package Modelo;
 
+import java.util.Objects;
+
 public class Producto {
     private long codigo;
     private String marca;
     private String descripcion;
     private int precio;
+    private int stock;
 
     public Producto(long codigo, String marca, String descripcion, int precio) {
         this.codigo = codigo;
@@ -44,5 +47,25 @@ public class Producto {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto producto = (Producto) o;
+        return getCodigo() == producto.getCodigo();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCodigo());
+    }
+
+    public int getStock(){
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 }
