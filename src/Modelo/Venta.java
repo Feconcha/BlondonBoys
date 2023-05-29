@@ -1,12 +1,18 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class Venta {
     private long codigoVenta;
     private String fechaVenta;
+    private Cliente cliente;
+    private ArrayList<Producto>productos;
 
-    public Venta(long codigoVenta, String fechaVenta) {
+    public Venta(long codigoVenta, String fechaVenta, Cliente cliente) {
         this.codigoVenta = codigoVenta;
         this.fechaVenta = fechaVenta;
+        this.cliente = cliente;
+        productos= new ArrayList<>();
     }
 
     public long getCodigoVenta() {
