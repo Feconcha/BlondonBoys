@@ -53,7 +53,9 @@ public class UIFerreteria {
         String descripcion = scan.next();
         System.out.println("Ingrese el precio del producto:");
         int precio = scan.nextInt();
-        controlador.creaProducto(codigo,marca,descripcion,precio);
+        System.out.println("Ingrese el stock del producto");
+        int stock = scan.nextInt();
+        controlador.creaProducto(codigo,marca,descripcion,precio,stock);
         System.out.println("Producto creado exitosamente.");
     }
     public void CrearVenta(){
