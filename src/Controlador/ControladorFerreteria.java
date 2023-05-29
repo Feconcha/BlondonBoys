@@ -4,6 +4,7 @@ import Modelo.Cliente;
 import Modelo.Producto;
 import Modelo.Venta;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ControladorFerreteria {
@@ -48,6 +49,25 @@ public class ControladorFerreteria {
             i++;
         }
         return listaProductos;
+    }
+    public Venta creaVenta(String rut){
+        LocalDate fechaHoy = LocalDate.now();
+        Cliente cliente = buscaCliente(rut);
+        long codigo = Ventas.size();
+
+        Venta venta = new Venta(codigo,fechaHoy,cliente);
+        Ventas.add(venta);
+        return venta;
+    }
+    public boolean añadirVenta(Long codigo, Venta venta){
+        Producto producto = buscaProducto(codigo);
+        if(producto.getStock()>0){
+            venta.addProductos(producto);
+            producto.setStock(producto.getStock()-1);
+            return true;
+        }
+        return false;
+
     }
 
 }
