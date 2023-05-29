@@ -32,8 +32,8 @@ public class ControladorFerreteria {
     public void creaCliente(String rut, String nombre, String direccion, String telefono){
         Clientes.add(new Cliente(rut,nombre,direccion,telefono));
     }
-    public void creaProducto(long codigo, String marca, String descripcion, int precio){
-        Productos.add(new Producto(codigo,marca,descripcion,precio));
+    public void creaProducto(long codigo, String marca, String descripcion, int precio, int stock){
+        Productos.add(new Producto(codigo,marca,descripcion,precio,stock));
     }
     public Venta creaVenta(String rut){
         LocalDate fechaHoy = LocalDate.now();
