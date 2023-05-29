@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Venta {
@@ -30,4 +31,15 @@ public class Venta {
     public void setFechaVenta(String fechaVenta) {
         this.fechaVenta = fechaVenta;
     }
+    public void addProductos(Producto producto){
+        productos.add(producto);
+    }
+    public int getVentas(){
+        return productos.size();
+    }
+    public String toString(){
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return codigoVenta + ";" + cliente.getRut() + ";" + fechaVenta.format(formato);
+    }
+
 }
