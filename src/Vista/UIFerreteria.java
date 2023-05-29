@@ -10,14 +10,11 @@ import java.util.Scanner;
 public class UIFerreteria {
 
     private static UIFerreteria instance = null;
-    private final ArrayList<Cliente> Clientes;
-    private final ArrayList<Producto> Productos;
+
     private final Scanner scan;
 
     private UIFerreteria(){
         scan = new Scanner(System.in);
-        Clientes = new ArrayList<>();
-        Productos = new ArrayList<>();
         scan.useDelimiter("[\t|\r\n]+");
     }
 
@@ -42,8 +39,7 @@ public class UIFerreteria {
         System.out.println("Ingrese el número de teléfono del cliente:");
         String telefono = scan.next();
 
-        Cliente cliente = new Cliente(rut, nombre, direccion, telefono);
-        Clientes.add(cliente);
+
 
         ControladorFerreteria.getInstance().creaCliente(rut,nombre,direccion,telefono);
         System.out.println("Cliente creado exitosamente.");
@@ -59,8 +55,7 @@ public class UIFerreteria {
         String descripcion = scan.next();
         System.out.println("Ingrese el precio del producto:");
         int precio = scan.nextInt();
-        Producto producto = new Producto(codigo, marca, descripcion, precio);
-        Productos.add(producto);
+
         ControladorFerreteria.getInstance().creaProducto(codigo,marca,descripcion,precio);
 
         System.out.println("Producto creado exitosamente.");
