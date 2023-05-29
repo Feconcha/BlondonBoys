@@ -1,6 +1,8 @@
 package Vista;
 
 import Controlador.ControladorFerreteria;
+import Modelo.Venta;
+
 import java.util.Scanner;
 
 public class UIFerreteria {
@@ -46,6 +48,25 @@ public class UIFerreteria {
         controlador.creaProducto(codigo,marca,descripcion,precio,stock);
         System.out.println("Producto creado exitosamente.");
     }
+    public void CrearVenta(){
+        String opcion;
+        long codigo;
+        System.out.println("Ingrese el rut del cliente");
+        String rut = scan.next();
+        Venta venta = controlador.creaVenta(rut);
+        do{
+            System.out.println("Ingrese el codigo del producto");
+            codigo = scan.nextLong();
+            if(controlador.añadirVenta(codigo,venta)){
+                System.out.println("¿Quiere comprar mas productos? s/n");
+                opcion = scan.next();
+            }else {
+                System.out.println("No hay mas stock de ese producto");
+                opcion="s";
+            }
+        }while(opcion.equalsIgnoreCase("s"));
+    }
+
     public void ListaClientes() {
         String [] datos;
         String [] listaClientes = controlador.listaClientes();
