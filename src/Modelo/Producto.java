@@ -44,5 +44,9 @@ public class Producto {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
+    public String toString(){
+
+        return codigo + ";" +  marca + ";" + descripcion + ";" + precio;
+    }
     
 }
