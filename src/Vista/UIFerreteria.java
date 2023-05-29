@@ -48,7 +48,7 @@ public class UIFerreteria {
     }
     public void ListaClientes() {
         String [] datos;
-        String [] listaClientes = ControladorFerreteria.getInstance().listaClientes();
+        String [] listaClientes = controlador.listaClientes();
         System.out.println("**** LISTADO DE CLIENTES **** ");
         System.out.printf("%1$-18s%2$-30s%3$-35s%4$-12s%n", "RUT", "Nombre","Direccion","Telefono");
         for(int i=0; i<listaClientes.length;i++){
@@ -58,7 +58,7 @@ public class UIFerreteria {
     }
     public void ListaProductos() {
         String [] datos;
-        String [] listaProductos = ControladorFerreteria.getInstance().listaProductos();
+        String [] listaProductos = controlador.listaProductos();
         System.out.println("**** LISTADO DE PRODUCTOS **** ");
         System.out.printf("%1$-13s%2$-20s%3$-30s%4$-30s%4$-40s%n", "Codigo", "Marca","Descripcion","Precio","Stock");
         for(int i=0; i<listaProductos.length;i++){
