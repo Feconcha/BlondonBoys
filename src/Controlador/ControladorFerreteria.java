@@ -67,7 +67,14 @@ public class ControladorFerreteria {
             return true;
         }
         return false;
-
+    }
+    public Cliente buscaCliente(String rut){
+        for(Cliente cliente: Clientes){
+            if(cliente.getRut().equals(rut)){
+                return cliente;
+            }
+        }
+        return null;
     }
 
 }
