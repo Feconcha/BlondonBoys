@@ -4,9 +4,13 @@ import Modelo.Cliente;
 import Modelo.Producto;
 import Modelo.Venta;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class ControladorFerreteria {
     private static ControladorFerreteria instance = null;
@@ -96,6 +100,22 @@ public class ControladorFerreteria {
             }
         }
         return null;
+    }
+    public void readClientes() throws FileNotFoundException {
+        Scanner sc= new Scanner(new File("Clientes.txt"));
+        String rut,nombre,direccion,telefono;
+        Cliente cliente;
+        sc.useDelimiter("\r\n|;");
+        sc.useLocale(Locale.UK);
+        while(sc.hasNext()){
+            rut= sc.next();
+            nombre = sc.next();
+            direccion = sc.next();
+            telefono= sc.next();
+            cliente= new Cliente(rut,nombre,direccion,telefono);
+            Clientes.add(cliente);
+        }
+        sc.close();
     }
 
 }
