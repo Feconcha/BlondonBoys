@@ -1,11 +1,12 @@
 package Modelo;
 
+import java.util.Objects;
+
 public class Cliente {
     private String rut;
     private String nombre;
     private String direccion;
     private String telefono;
-
     public Cliente(String rut, String nombre, String direccion, String telefono) {
         this.rut = rut;
         this.nombre = nombre;
@@ -40,5 +41,10 @@ public class Cliente {
     public String getTelefono() {
         return telefono;
     }
+    public String toString(){
+        return rut + ";" +  nombre + ";" + direccion + ";" + telefono;
+    }
+
+
 
 }
