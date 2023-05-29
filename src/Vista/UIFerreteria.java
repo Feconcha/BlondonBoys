@@ -60,12 +60,13 @@ public class UIFerreteria {
     }
     public void CrearVenta(){
         String opcion;
+        long codigo;
         System.out.println("Ingrese el rut del cliente");
         String rut = scan.next();
         Venta venta =controlador.creaVenta(rut);
         do{
             System.out.println("Ingrese el código del producto");
-            long codigo = scan.nextLong();
+            codigo = scan.nextLong();
             if(controlador.añadirVenta(codigo,venta)){
                 System.out.println("¿Quiere comprar mas productos? s/n");
                 opcion = scan.next();
@@ -94,17 +95,17 @@ public class UIFerreteria {
         String [] datos;
         String [] listaProductos = controlador.listaProductos();
         System.out.println("**** LISTADO DE PRODUCTOS **** ");
-        System.out.printf("%1$-13s%2$-25s%3$-30s%4$-40s%n", "Codigo", "Marca","Descripcion","Precio");
+        System.out.printf("%1$-13s%2$-25s%3$-30s%4$-30s%5$-40s%n", "Codigo", "Marca","Descripcion","Precio","Stock");
         for(int i=0; i<listaProductos.length;i++){
             datos = listaProductos[i].split(";");
-            System.out.printf("%1$-13s%2$-25s%3$-30s%4$-40s%n", datos[0], datos[1], datos[2], datos[3]);
+            System.out.printf("%1$-13s%2$-25s%3$-30s%4$-30s%5$-40s%n", datos[0], datos[1], datos[2], datos[3],datos[4]);
         }
     }
     public void ListaVentas(){
         String [] listaVentas = controlador.listaVentas();
         String [] datos;
         System.out.println("LISTADO DE VENTAS");
-        System.out.printf("%1$-16s%2$-30s%3$-30s%4$-40s%n", "Codigo de venta", "Rut Cliente","Código producto","Fecha");
+        System.out.printf("%1$-16s%2$-30s%3$-30s%4$-40s%n", "Rut cliente", "Codigo","Fecha","Cantidad de productos");
 
         for(int i=0; i< listaVentas.length;i++){
             datos = listaVentas[i].split(";");
@@ -145,6 +146,7 @@ public class UIFerreteria {
                     break;
                 case 6:
                     ListaVentas();
+                    break;
                 case 7:
                     System.exit(1);
                     break;
