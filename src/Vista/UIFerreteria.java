@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class UIFerreteria {
 
     private static UIFerreteria instance = null;
-
     private final Scanner scan;
 
     private UIFerreteria(){
@@ -56,7 +55,7 @@ public class UIFerreteria {
         ControladorFerreteria.getInstance().creaProducto(codigo,marca,descripcion,precio);
         System.out.println("Producto creado exitosamente.");
     }
-    public void CrearVenta(){
+    public void CrearVenta(){//cambiar, primero se pide rut, fecha, codventa y codproductos (y su cantidad de productos)
         System.out.println("Ingrese el codigo de la venta");
         String codVenta = scan.next();
         System.out.println("Ingrese la fecha de la venta");
@@ -68,7 +67,7 @@ public class UIFerreteria {
         ControladorFerreteria.getInstance().agregaVenta(codVenta,fechaVenta,codProducto,rutCliente);
         System.out.println("Venta creada exitosamente.");
     }
-
+    //LISTAS
     public void ListaClientes() {
         String [] datos;
         String [] listaClientes = ControladorFerreteria.getInstance().listaClientes();
@@ -97,14 +96,13 @@ public class UIFerreteria {
         String [] listaVentas = ControladorFerreteria.getInstance().listaVentas();
         String [] datos;
         System.out.println("LISTADO DE VENTAS");
-        System.out.printf("%1$-13s%2$-20s%3$-30s%4$-40s%n", "Codigo de venta", "Rut Cliente","Código producto","Fecha");
+        System.out.printf("%1$-16s%2$-30s%3$-30s%4$-40s%n", "Codigo de venta", "Rut Cliente","Código producto","Fecha");
 
         for(int i=0; i< listaVentas.length;i++){
             datos = listaVentas[i].split(";");
-            System.out.printf("%1$-13s%2$-20s%3$-30s%4$-40s%n", datos[0], datos[1], datos[2], datos[3]);
+            System.out.printf("%1$-16s%2$-30s%3$-30s%4$-40s%n", datos[0], datos[1], datos[2], datos[3]);
         }
     }
-
     public void menu() {
         int op;
         while (true){
