@@ -106,10 +106,11 @@ public class UIFerreteria {
             System.out.println("\n*** MENÚ PRINCIPAL ***");
             System.out.println("1.- Crear nuevo cliente");
             System.out.println("2.- Crear nuevo producto");
-            System.out.println("3.- Listar a todos los clientes");
-            System.out.println("4.- Listar todos los productos");
-            System.out.println("5.- Listar ventas");
-            System.out.println("6.- Salir");
+            System.out.println("3.- Crear venta");
+            System.out.println("4.- Listar a todos los clientes");
+            System.out.println("5.- Listar todos los productos");
+            System.out.println("6.- Listar ventas");
+            System.out.println("7.- Salir");
             System.out.println("Ingrese opción:");
             op = scan.nextInt();
 
@@ -121,15 +122,18 @@ public class UIFerreteria {
                     CrearProducto();
                     break;
                 case 3:
-                    ListaClientes();
+                    CrearVenta();
                     break;
                 case 4:
-                    ListaProductos();
+                    ListaClientes();
                     break;
                 case 5:
-                    ListaVentas();
+                    ListaProductos();
                     break;
                 case 6:
+                    ListaVentas();
+                    break;
+                case 7:
                     System.out.println("Saliendo...");
                     System.exit(1);
                     break;
