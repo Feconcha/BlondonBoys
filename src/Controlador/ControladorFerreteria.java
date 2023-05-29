@@ -3,6 +3,9 @@ package Controlador;
 import Modelo.Cliente;
 import Modelo.Producto;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class ControladorFerreteria {
@@ -45,6 +48,14 @@ public class ControladorFerreteria {
             i++;
         }
         return listaProductos;
+    }
+    public void saveClientes() throws FileNotFoundException{
+        PrintStream pop= new PrintStream(new File("Clientes.txt"));
+        for (Cliente cliente : Clientes){
+            pop.println(cliente);
+
+        }
+        pop.close();
     }
 
 }
