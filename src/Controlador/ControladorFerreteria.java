@@ -56,7 +56,7 @@ public class ControladorFerreteria {
         String[] listaProductos = new String[Productos.size()];
         int i=0;
         for(Producto producto: Productos){
-            listaProductos[i] = producto.getCodigo() + ";" + producto.getMarca() + ";" + producto.getDescripcion() + ";" + producto.getPrecio();
+            listaProductos[i] = producto.getCodigo() + ";" + producto.getMarca() + ";" + producto.getDescripcion() + ";" + producto.getPrecio() + ";" + producto.getStock();
             i++;
         }
         return listaProductos;
