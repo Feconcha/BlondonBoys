@@ -97,6 +97,16 @@ public class ControladorFerreteria {
         datosProductos[3]= String.valueOf(productos.getPrecio());
         return datosProductos;
     }
+    public boolean añadirVenta(Long codigo, Venta venta){
+        Producto producto = buscaProducto(codigo);
+        if(producto.getStock()>0){
+            venta.addProductos(producto);
+            producto.setStock(producto.getStock()-1);
+            return true;
+        }
+        return false;
+
+    }
     public Cliente buscaCliente(String rut) {
         for (Cliente cliente : Clientes) {
             if (cliente.getRut().equals(rut)) {
