@@ -105,9 +105,9 @@ public class ControladorFerreteria {
         }
         return null;
     }
-    private Producto buscaCodProducto(long codigo){//cambiar
+    public Producto buscaProducto(long codigo){
         for(Producto producto : Productos){
-            if(producto.equals(codigo)){
+            if(producto.getCodigo()==codigo){
                 return producto;
             }
         }
