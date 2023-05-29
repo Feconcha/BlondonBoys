@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -8,6 +9,7 @@ public class Venta {
     private String fechaVenta;
     private Cliente cliente;
     private ArrayList<Producto>productos;
+    private LocalDate fechaVenta;
 
     public Venta(long codigoVenta, String fechaVenta, Cliente cliente) {
         this.codigoVenta = codigoVenta;
@@ -42,4 +44,23 @@ public class Venta {
         return codigoVenta + ";" + cliente.getRut() + ";" + fechaVenta.format(formato);
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public ArrayList<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(ArrayList<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public void setFechaVenta(LocalDate fechaVenta) {
+        this.fechaVenta = fechaVenta;
+    }
 }
