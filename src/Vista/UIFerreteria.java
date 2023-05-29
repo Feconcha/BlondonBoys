@@ -11,6 +11,7 @@ public class UIFerreteria {
 
     private static UIFerreteria instance = null;
     private final Scanner scan;
+    private ControladorFerreteria controlador = ControladorFerreteria.getInstance();
 
     private UIFerreteria(){
         scan = new Scanner(System.in);
@@ -56,6 +57,7 @@ public class UIFerreteria {
         ControladorFerreteria.getInstance().creaProducto(codigo,marca,descripcion,precio,stock);
         System.out.println("Producto creado exitosamente.");
     }
+
 
     public void ListaClientes() {
         String [] datos;
