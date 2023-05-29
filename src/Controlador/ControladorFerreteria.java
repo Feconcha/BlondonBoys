@@ -5,6 +5,7 @@ import Modelo.Producto;
 import Modelo.Venta;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ControladorFerreteria {
@@ -32,6 +33,16 @@ public class ControladorFerreteria {
     public void creaProducto(long codigo, String marca, String descripcion, int precio, int stock){
         Productos.add(new Producto(codigo,marca,descripcion,precio,stock));
     }
+    public Venta creaVenta(String rut){
+        LocalDate fechaHoy = LocalDate.now();
+        Cliente cliente = buscaCliente(rut);
+        long codigo = Ventas.size();
+
+        Venta venta = new Venta(codigo,fechaHoy,cliente);
+        Ventas.add(venta);
+        return venta;
+    }
+    //LISTAS
     public String[] listaClientes() {
         String [] listaClientes = new String[Clientes.size()];
         int i=0;
@@ -50,14 +61,15 @@ public class ControladorFerreteria {
         }
         return listaProductos;
     }
-    public Venta creaVenta(String rut){
-        LocalDate fechaHoy = LocalDate.now();
-        Cliente cliente = buscaCliente(rut);
-        long codigo = Ventas.size();
-
-        Venta venta = new Venta(codigo,fechaHoy,cliente);
-        Ventas.add(venta);
-        return venta;
+    public String[] listaVentas() {
+        String[] listaVentas = new String[Ventas.size()];
+        int i=0;
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        for(Venta venta: Ventas){
+            listaVentas[i] = venta.getCliente().getRut() + ";" + venta.getCodigoVenta() + ";" + venta.getFechaVenta().format(formato) + ";" + venta.getVentas();
+            i++;
+        }
+        return listaVentas;
     }
     public boolean añadirVenta(Long codigo, Venta venta){
         Producto producto = buscaProducto(codigo);
@@ -68,6 +80,7 @@ public class ControladorFerreteria {
         }
         return false;
     }
+    //BUSQUEDAS
     public Cliente buscaCliente(String rut){
         for(Cliente cliente: Clientes){
             if(cliente.getRut().equals(rut)){
