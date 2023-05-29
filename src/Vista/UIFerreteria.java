@@ -1,10 +1,6 @@
 package Vista;
 
 import Controlador.ControladorFerreteria;
-import Modelo.Cliente;
-import Modelo.Producto;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UIFerreteria {
@@ -27,13 +23,10 @@ public class UIFerreteria {
 
         System.out.println("Ingrese el rut del cliente");
         String rut = scan.next();
-
         System.out.println("Ingrese el nombre del cliente:");
         String nombre = scan.next();
-
         System.out.println("Ingrese la dirección del cliente:");
         String direccion = scan.next();
-
         System.out.println("Ingrese el número de teléfono del cliente:");
         String telefono = scan.next();
         controlador.creaCliente(rut,nombre,direccion,telefono);
@@ -57,10 +50,7 @@ public class UIFerreteria {
         String [] datos;
         String [] listaClientes = ControladorFerreteria.getInstance().listaClientes();
         System.out.println("**** LISTADO DE CLIENTES **** ");
-        
-        
         System.out.printf("%1$-18s%2$-30s%3$-35s%4$-12s%n", "RUT", "Nombre","Direccion","Telefono");
-
         for(int i=0; i<listaClientes.length;i++){
             datos = listaClientes[i].split(";");
             System.out.printf("%1$-18s%2$-30s%3$-35s%4$-12s%n", datos[0], datos[1], datos[2], datos[3]);
@@ -97,7 +87,8 @@ public class UIFerreteria {
             System.out.println("2.- Crear nuevo producto");
             System.out.println("3.- Listar a todos los clientes");
             System.out.println("4.- Listar todos los productos");
-            System.out.println("5.- Salir");
+            System.out.println("5.- Listar ventas");
+            System.out.println("6.- Salir");
             System.out.println("Ingrese opción:");
             op = scan.nextInt();
 
@@ -115,6 +106,9 @@ public class UIFerreteria {
                     ListaProductos();
                     break;
                 case 5:
+                    ListaVentas();
+                    break;
+                case 6:
                     System.out.println("Saliendo...");
                     System.exit(1);
                     break;
