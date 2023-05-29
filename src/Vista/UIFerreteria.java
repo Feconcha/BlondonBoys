@@ -39,7 +39,7 @@ public class UIFerreteria {
 
         System.out.println("Ingrese el número de teléfono del cliente:");
         String telefono = scan.next();
-        ControladorFerreteria.getInstance().creaCliente(rut,nombre,direccion,telefono);
+        controlador.creaCliente(rut,nombre,direccion,telefono);
         System.out.println("Cliente creado exitosamente.");
     }
 
@@ -53,7 +53,7 @@ public class UIFerreteria {
         String descripcion = scan.next();
         System.out.println("Ingrese el precio del producto:");
         int precio = scan.nextInt();
-        ControladorFerreteria.getInstance().creaProducto(codigo,marca,descripcion,precio);
+        controlador.creaProducto(codigo,marca,descripcion,precio);
         System.out.println("Producto creado exitosamente.");
     }
     public void CrearVenta(){
@@ -76,7 +76,7 @@ public class UIFerreteria {
     //LISTAS
     public void ListaClientes() {
         String [] datos;
-        String [] listaClientes = ControladorFerreteria.getInstance().listaClientes();
+        String [] listaClientes = controlador.listaClientes();
         System.out.println("**** LISTADO DE CLIENTES **** ");
         
         
@@ -90,7 +90,7 @@ public class UIFerreteria {
 
     public void ListaProductos() {
         String [] datos;
-        String [] listaProductos = ControladorFerreteria.getInstance().listaProductos();
+        String [] listaProductos = controlador.listaProductos();
         System.out.println("**** LISTADO DE PRODUCTOS **** ");
         System.out.printf("%1$-13s%2$-25s%3$-30s%4$-40s%n", "Codigo", "Marca","Descripcion","Precio");
         for(int i=0; i<listaProductos.length;i++){
@@ -99,7 +99,7 @@ public class UIFerreteria {
         }
     }
     public void ListaVentas(){
-        String [] listaVentas = ControladorFerreteria.getInstance().listaVentas();
+        String [] listaVentas = controlador.listaVentas();
         String [] datos;
         System.out.println("LISTADO DE VENTAS");
         System.out.printf("%1$-16s%2$-30s%3$-30s%4$-40s%n", "Codigo de venta", "Rut Cliente","Código producto","Fecha");
