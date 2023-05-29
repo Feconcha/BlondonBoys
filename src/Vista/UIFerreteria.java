@@ -60,10 +60,10 @@ public class UIFerreteria {
         String [] datos;
         String [] listaProductos = controlador.listaProductos();
         System.out.println("**** LISTADO DE PRODUCTOS **** ");
-        System.out.printf("%1$-13s%2$-20s%3$-30s%4$-30s%4$-40s%n", "Codigo", "Marca","Descripcion","Precio","Stock");
+        System.out.printf("%1$-13s%2$-20s%3$-30s%4$-30s%5$-40s%n", "Codigo", "Marca","Descripcion","Precio","Stock");
         for(int i=0; i<listaProductos.length;i++){
             datos = listaProductos[i].split(";");
-            System.out.printf("%1$-13s%2$-20s%3$-30s%4$-30s%4$-40s%n", datos[0], datos[1], datos[2], datos[3],datos[4]);
+            System.out.printf("%1$-13s%2$-20s%3$-30s%4$-30s%5$-40s%n", datos[0], datos[1], datos[2], datos[3],datos[4]);
         }
     }
     public void ListaVentas() {
