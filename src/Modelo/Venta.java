@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,10 @@ public class Venta {
 
     public void setFechaVenta(LocalDate fechaVenta) {
         this.fechaVenta = fechaVenta;
+    }
+    public String toString(){
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return codigoVenta + ";" + cliente.getRut() + ";" + fechaVenta.format(formato);
     }
 
 
