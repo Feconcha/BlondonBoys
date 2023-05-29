@@ -9,11 +9,12 @@ public class Producto {
     private int precio;
     private int stock;
 
-    public Producto(long codigo, String marca, String descripcion, int precio) {
+    public Producto(long codigo, String marca, String descripcion, int precio, int stock) {
         this.codigo = codigo;
         this.marca = marca;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.stock = stock;
     }
 
     public long getCodigo() {
