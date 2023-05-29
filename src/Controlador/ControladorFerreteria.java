@@ -5,6 +5,7 @@ import Modelo.Producto;
 import Modelo.Venta;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -62,13 +63,12 @@ public class ControladorFerreteria {
         return listaProductos;
     }
     //PRODUC
-    public String [] listaVentas(){
-        String [] listaVentas = new String[Ventas.size()];
+    public String[] listaVentas() {
+        String[] listaVentas = new String[Ventas.size()];
         int i=0;
-        for(Venta ventas : Ventas){
-            String[]listaCodProducto = new String[Ventas.size()];
-            listaCodProducto[i]= Arrays.toString(ventas.devuelveCodProducto());
-            listaVentas[i]=ventas.getCodigoVenta() + ";" + ventas.getCliente().getRut() + ";" + listaCodProducto[i] + ";" + ventas.getFechaVenta();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        for(Venta venta: Ventas){
+            listaVentas[i] = venta.getCliente().getRut() + ";" + venta.getCodigoVenta() + ";" + venta.getFechaVenta().format(formato) + ";" + venta.getVentas();
             i++;
         }
         return listaVentas;
