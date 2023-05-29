@@ -46,6 +46,9 @@ public class Venta {
     public LocalDate getFechaVenta() {
         return fechaVenta;
     }
+    public void addProductos(Producto producto){
+        productos.add(producto);
+    }
 
     public void setFechaVenta(LocalDate fechaVenta) {
         this.fechaVenta = fechaVenta;
