@@ -50,6 +50,9 @@ public class Venta {
     public void setFechaVenta(LocalDate fechaVenta) {
         this.fechaVenta = fechaVenta;
     }
+    public int getVentas(){
+        return productos.size();
+    }
     public String toString(){
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return codigoVenta + ";" + cliente.getRut() + ";" + fechaVenta.format(formato);
