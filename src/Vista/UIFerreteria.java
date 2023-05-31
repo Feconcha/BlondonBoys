@@ -33,8 +33,7 @@ public class UIFerreteria {
         System.out.println("Ingrese el rut del cliente");
         String rut = scan.next();
 
-        System.out.println("Ingrese el nombre del cliente:");
-        String nombre = scan.next();
+        String nombre = validarNombre();
 
         System.out.println("Ingrese la dirección del cliente:");
         String direccion = scan.next();
@@ -51,14 +50,12 @@ public class UIFerreteria {
 
 
     public void CrearProducto() {
-        System.out.println("Ingrese el codigo del producto");
-        long codigo = scan.nextLong();
+        long codigo = validarCodigo();
         System.out.println("Ingrese la marca del producto");
         String marca = scan.next();
         System.out.println("Ingrese el descripción del producto:");
         String descripcion = scan.next();
-        System.out.println("Ingrese el precio del producto:");
-        int precio = scan.nextInt();
+        int precio = validarPrecio();
         Producto producto = new Producto(codigo, marca, descripcion, precio);
         Productos.add(producto);
         ControladorFerreteria.getInstance().creaProducto(codigo,marca,descripcion,precio);
@@ -70,8 +67,8 @@ public class UIFerreteria {
         String [] datos;
         String [] listaClientes = ControladorFerreteria.getInstance().listaClientes();
         System.out.println("**** LISTADO DE CLIENTES **** ");
-        
-        
+
+
         System.out.printf("%1$-18s%2$-30s%3$-35s%4$-12s%n", "RUT", "Nombre","Direccion","Telefono");
 
         for(int i=0; i<listaClientes.length;i++){
@@ -89,6 +86,54 @@ public class UIFerreteria {
             datos = listaProductos[i].split(";");
             System.out.printf("%1$-13s%2$-20s%3$-30s%4$-40s%n", datos[0], datos[1], datos[2], datos[3]);
         }
+    }
+
+
+    private String validarNombre(){
+        do{
+            System.out.println("Ingrese el nombre del cliente");
+            int nombreInt;
+            String nombre;
+            nombre = scan.next();
+            try{
+                nombreInt=Integer.parseInt(nombre);
+                System.out.println("El nombre posee caracteres no validos");
+
+            } catch (NumberFormatException e){
+                return nombre;
+            }
+        }while (true);
+    }
+
+
+    private long validarCodigo(){
+        do{
+            System.out.println("Ingrese el codigo del producto");
+            String codigoStr;
+            long codigo;
+            codigoStr=scan.next();
+            try{
+                codigo=Long.parseLong(codigoStr);
+                return codigo;
+            } catch (NumberFormatException e){
+                System.out.println("El codigo posee valores no validos");
+            }
+        }while (true);
+    }
+
+    private int validarPrecio(){
+        do{
+            System.out.println("Ingrese el precio del producto");
+            String precioStr;
+            int precio;
+            precioStr=scan.next();
+            try{
+                precio= Integer.parseInt(precioStr);
+                return precio;
+            } catch (NumberFormatException e){
+                System.out.println("El precio posee valores no validos");
+            }
+        }while (true);
     }
 
     public void menu() {
@@ -120,7 +165,7 @@ public class UIFerreteria {
                     break;
                 case 5:
                     System.out.println("Saliendo...");
-                    System.exit(1);
+                    System.exit(0);
                     break;
             }
         }
