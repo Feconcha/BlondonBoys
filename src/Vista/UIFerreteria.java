@@ -110,6 +110,8 @@ public class UIFerreteria {
             System.out.println("4.- Listar a todos los clientes");
             System.out.println("5.- Listar todos los productos");
             System.out.println("6.- Listar ventas");
+            //System.out.println("7.- Guardar Datos");
+            //System.out.println("8.- Leer Datos");
             System.out.println("7.- Salir");
             System.out.println("Ingrese opción:");
             op = scan.nextInt();
