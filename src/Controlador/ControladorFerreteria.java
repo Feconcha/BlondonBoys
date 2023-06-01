@@ -6,6 +6,7 @@ import Modelo.Venta;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -100,6 +101,14 @@ public class ControladorFerreteria {
             }
         }
         return null;
+    }
+    public void saveClientes() throws FileNotFoundException{
+        PrintStream pop= new PrintStream(new File("Clientes.txt"));
+        for (Cliente cliente : Clientes){
+            pop.println(cliente);
+
+        }
+        pop.close();
     }
     public void readClientes() throws FileNotFoundException {
         Scanner sc= new Scanner(new File("Clientes.txt"));
