@@ -126,5 +126,13 @@ public class ControladorFerreteria {
         }
         sc.close();
     }
+    public void saveProductos() throws FileNotFoundException{
+        PrintStream pop= new PrintStream(new File("Productos.txt"));
+        for (Producto producto : Productos){
+            pop.println(producto);
+
+        }
+        pop.close();
+    }
 
 }
