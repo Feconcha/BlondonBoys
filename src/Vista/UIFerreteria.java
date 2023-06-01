@@ -3,6 +3,7 @@ package Vista;
 import Controlador.ControladorFerreteria;
 import Modelo.Venta;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class UIFerreteria {
@@ -124,20 +125,48 @@ public class UIFerreteria {
                     CrearProducto();
                     break;
                 case 3:
-                    CrearVenta();
+
                     break;
                 case 4:
                     ListaClientes();
                     break;
                 case 5:
                     ListaProductos();
+
                     break;
                 case 6:
-                    ListaVentas();
+
                     break;
                 case 7:
+                    try {
+                        controlador.saveClientes();
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        controlador.saveProductos();
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+                case 8:
+                    try {
+                        controlador.readClientes();
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        controlador.readProductos();
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+
+                case 9:
                     System.out.println("Saliendo...");
-                    System.exit(1);
+                    System.exit(0);
                     break;
             }
         }
