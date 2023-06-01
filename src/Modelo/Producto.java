@@ -54,4 +54,8 @@ public class Producto {
     public void setStock(int stock) {
         this.stock = stock;
     }
+    public String toString(){
+
+        return codigo + ";" +  marca + ";" + descripcion + ";" + precio + ";" + stock;
+    }
 }
