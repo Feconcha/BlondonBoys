@@ -8,7 +8,7 @@ import java.util.List;
 public class Venta {
     private long codigoVenta;
     private Cliente cliente;
-    private ArrayList<Producto> productos;
+    private ArrayList<DetalleVenta> detalleVentas;
     private LocalDate fechaVenta;
 
 
@@ -16,7 +16,7 @@ public class Venta {
         this.codigoVenta = codigoVenta;
         this.fechaVenta = fechaVenta;
         this.cliente = cliente;
-        productos= new ArrayList<>();
+        detalleVentas= new ArrayList<>();
     }
 
     public long getCodigoVenta() {
@@ -34,27 +34,20 @@ public class Venta {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-    public ArrayList<Producto> getProductos() {
-        return productos;
+    public ArrayList<DetalleVenta>getDetalleVentas(){
+        return detalleVentas;
     }
-
-    public void setProductos(ArrayList<Producto> productos) {
-        this.productos = productos;
+    public void setDetalleVentas(ArrayList<DetalleVenta> detalleVentas){
+        this.detalleVentas = detalleVentas;
     }
-
     public LocalDate getFechaVenta() {
         return fechaVenta;
     }
-    public void addProductos(Producto producto){
-        productos.add(producto);
+    public void addDetalleVetnas(DetalleVenta detalleVenta){
+        detalleVentas.add(detalleVenta);
     }
-
     public void setFechaVenta(LocalDate fechaVenta) {
         this.fechaVenta = fechaVenta;
-    }
-    public int getVentas(){
-        return productos.size();
     }
     public String toString(){
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
