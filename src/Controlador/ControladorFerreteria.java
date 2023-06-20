@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.Cliente;
+import Modelo.DetalleVenta;
 import Modelo.Producto;
 import Modelo.Venta;
 
@@ -35,10 +36,12 @@ public class ControladorFerreteria {
     public void creaProducto(long codigo, String marca, String descripcion, int precio, int stock){
         Productos.add(new Producto(codigo,marca,descripcion,precio,stock));
     }
-    public Venta creaVenta(String rut){
+    public Venta creaVenta(long codProducto, long codVenta, String rut, int cantidad){
         LocalDate fechaHoy = LocalDate.now();
         Cliente cliente = buscaCliente(rut);
         long codigo = Ventas.size();
+
+        DetalleVenta detalleVenta = new DetalleVenta(cantidad,)
 
         Venta venta = new Venta(codigo,fechaHoy,cliente);
         Ventas.add(venta);
@@ -97,15 +100,16 @@ public class ControladorFerreteria {
         datosProductos[3]= String.valueOf(productos.getPrecio());
         return datosProductos;
     }
-    public boolean añadirVenta(Long codigo, Venta venta){
+    public boolean añadirAVenta(long codigo, Venta venta, int cantidad){
         Producto producto = buscaProducto(codigo);
-        if(producto.getStock()>0){
-            venta.addProductos(producto);
-            producto.setStock(producto.getStock()-1);
-            return true;
+        if(producto!=null){
+            if(producto.getStock()>=cantidad){
+                venta.addProducto(producto, cantidad);
+                producto.setStock(producto.getStock()-cantidad);
+                return true;
+            }
         }
         return false;
-
     }
     public Cliente buscaCliente(String rut) {
         for (Cliente cliente : Clientes) {
