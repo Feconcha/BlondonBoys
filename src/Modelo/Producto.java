@@ -49,24 +49,15 @@ public class Producto {
         this.precio = precio;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Producto producto = (Producto) o;
-        return getCodigo() == producto.getCodigo();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getCodigo());
-    }
-
-    public int getStock(){
+    public int getStock() {
         return stock;
     }
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+    public String toString(){
+
+        return codigo + ";" +  marca + ";" + descripcion + ";" + precio + ";" + stock;
     }
 }
