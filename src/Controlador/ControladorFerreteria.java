@@ -120,6 +120,17 @@ public class ControladorFerreteria {
         }
         return false;
     }
+    public String[] returnDatos(Venta venta){
+        return venta.detalleVenta();
+    }
+
+    public int getTotal(Venta venta){
+        return venta.getMontoTotal();
+    }
+
+    public int getCantidadProductos(Venta venta){
+        return venta.getCantidadProductos();
+    }
     //BUSQUEDAS
     public Cliente buscaCliente(String rut) {
         for (Cliente cliente : Clientes) {
