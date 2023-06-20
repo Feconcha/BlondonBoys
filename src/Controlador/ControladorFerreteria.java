@@ -169,5 +169,31 @@ public class ControladorFerreteria {
         }
         pop.close();
     }
+    public void readVentas() throws FileNotFoundException {
+        ventas.clear();
+        Scanner sc= new Scanner(new File("Ventas.txt"));
+        String codigoVenta, fechaVenta, rutCliente, codigoProducto;
+        int cantidad;
+        Cliente cliente; Producto producto;
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        sc.useDelimiter("\r\n|;");
+        sc.useLocale(Locale.UK);
+        while(sc.hasNext()){
+            codigoVenta = sc.next();
+            rutCliente = sc.next();
+            fechaVenta = sc.next();
+            cliente = buscaCliente(rutCliente);
+            Venta venta = new Venta(Long.parseLong(codigoVenta),LocalDate.parse(fechaVenta,formato),cliente);
+            codigoProducto = sc.next();
+            while(!codigoProducto.equals("*")){
+                cantidad = sc.nextInt();
+                producto = buscaProducto(Long.parseLong(codigoProducto));
+                venta.addProducto(producto,cantidad);
+                codigoProducto = sc.next();
+            }
+            ventas.add(venta);
+        }
+        sc.close();
+    }
 
 }
