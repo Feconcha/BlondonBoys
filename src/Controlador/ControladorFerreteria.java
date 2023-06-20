@@ -235,6 +235,4 @@ public class ControladorFerreteria {
         }
         sc.close();
     }
-
-
 }

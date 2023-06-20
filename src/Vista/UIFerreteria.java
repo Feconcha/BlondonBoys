@@ -5,6 +5,7 @@ import Modelo.Cliente;
 import Modelo.Producto;
 import Modelo.Venta;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -120,11 +121,13 @@ public class UIFerreteria {
             System.out.println("\n*** MENÚ PRINCIPAL ***");
             System.out.println("1.- Crear nuevo cliente");
             System.out.println("2.- Crear nuevo producto");
-            System.out.println("3.- Crear Venta");
+            System.out.println("3.- Crear venta");
             System.out.println("4.- Listar a todos los clientes");
             System.out.println("5.- Listar todos los productos");
-            System.out.println("6.- Listar todas las ventas");
-            System.out.println("7.- Salir");
+            System.out.println("6.- Listar ventas");
+            System.out.println("7.- Guardar Datos");
+            System.out.println("8.- Leer Datos");
+            System.out.println("9.- Salir");
             System.out.println("Ingrese opción:");
             op = scan.nextInt();
 
@@ -148,11 +151,30 @@ public class UIFerreteria {
                     ListaVentas();
                     break;
                 case 7:
-                    System.exit(1);
+                    try {
+                        controlador.saveClientes();
+                        controlador.saveProductos();
+                        controlador.saveVentas();
+                        System.out.println("Datos guardados exitosamente");
+                    } catch (FileNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
-                default:
-                    System.out.println("Los datos ingresados son incorrectos");
+                case 8:
+                    try {
+                        controlador.readClientes();
+                        controlador.readProductos();
+                        controlador.readVentas();
+                        System.out.println("Datos leidos exitosamente");
+                    } catch (FileNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
 
+                case 9:
+                    System.out.println("Saliendo...");
+                    System.exit(0);
+                    break;
             }
         }
     }
