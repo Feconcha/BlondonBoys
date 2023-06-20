@@ -5,11 +5,12 @@ import Modelo.DetalleVenta;
 import Modelo.Producto;
 import Modelo.Venta;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ControladorFerreteria {
     private static ControladorFerreteria instance = null;
@@ -38,7 +39,7 @@ public class ControladorFerreteria {
     }
     public Venta creaVenta(long codProducto, String rut, int cantidad, LocalDate fecha) throws Exception {
         Cliente cliente = buscaCliente(rut);
-        long codigo = ventas.size();
+        long codigo = Ventas.size();
 
         if(cliente==null){
             throw new Exception("No existe un cliente con el rut indicado");
@@ -46,7 +47,7 @@ public class ControladorFerreteria {
             Venta venta = new Venta(codigo, fecha, cliente);
             Producto producto = buscaProducto(codProducto);
             if(producto.getStock()>=cantidad){
-                ventas.add(venta);
+                Ventas.add(venta);
                 venta.addProducto(producto, cantidad);
                 producto.setStock(producto.getStock()-cantidad);
                 return venta;
@@ -119,6 +120,7 @@ public class ControladorFerreteria {
         }
         return false;
     }
+    //BUSQUEDAS
     public Cliente buscaCliente(String rut) {
         for (Cliente cliente : Clientes) {
             if (cliente.getRut().equals(rut)) {
@@ -134,6 +136,49 @@ public class ControladorFerreteria {
             }
         }
         return null;
+    }
+    //LEER Y GUARDAR DATOS
+    public void saveVentas() throws FileNotFoundException {
+        PrintStream pop= new PrintStream(new File("Ventas.txt"));
+        ArrayList<DetalleVenta> detalleVentas;
+        for (Venta venta: Ventas){
+            pop.println(venta);
+            detalleVentas = venta.getDetalleVentas();
+            if(detalleVentas.size()>0){
+                for(DetalleVenta detalleVenta: detalleVentas){
+                    pop.println(detalleVenta);
+                }
+                pop.println("*");
+            }
+        }
+        pop.close();
+    }
+
+    public void readVentas() throws FileNotFoundException {
+        Ventas.clear();
+        Scanner sc= new Scanner(new File("Ventas.txt"));
+        String codigoVenta, fechaVenta, rutCliente, codigoProducto;
+        int cantidad;
+        Cliente cliente; Producto producto;
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        sc.useDelimiter("\r\n|;");
+        sc.useLocale(Locale.UK);
+        while(sc.hasNext()){
+            codigoVenta = sc.next();
+            rutCliente = sc.next();
+            fechaVenta = sc.next();
+            cliente = buscaCliente(rutCliente);
+            Venta venta = new Venta(Long.parseLong(codigoVenta),LocalDate.parse(fechaVenta,formato),cliente);
+            codigoProducto = sc.next();
+            while(!codigoProducto.equals("*")){
+                cantidad = sc.nextInt();
+                producto = buscaProducto(Long.parseLong(codigoProducto));
+                venta.addProducto(producto,cantidad);
+                codigoProducto = sc.next();
+            }
+            Ventas.add(venta);
+        }
+        sc.close();
     }
 
 
