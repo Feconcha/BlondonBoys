@@ -39,14 +39,24 @@ public class ControladorFerreteria {
     public void creaProducto(long codigo, String marca, String descripcion, int precio, int stock){
         Productos.add(new Producto(codigo,marca,descripcion,precio,stock));
     }
-    public Venta creaVenta(String rut){
-        LocalDate fechaHoy = LocalDate.now();
+    public Venta creaVenta(long codProducto, String rut, int cantidad, LocalDate fecha) throws Exception {
         Cliente cliente = buscaCliente(rut);
         long codigo = Ventas.size();
 
-        Venta venta = new Venta(codigo,fechaHoy,cliente);
-        Ventas.add(venta);
-        return venta;
+        if(cliente==null){
+            throw new Exception("No existe un cliente con el rut indicado");
+        }else{
+            Venta venta = new Venta(codigo, fecha, cliente);
+            Producto producto = buscaProducto(codProducto);
+            if(producto.getStock()>=cantidad){
+                Ventas.add(venta);
+                venta.addProducto(producto, cantidad);
+                producto.setStock(producto.getStock()-cantidad);
+                return venta;
+            }else{
+                throw new Exception("No hay suficiente stock del producto");
+            }
+        }
     }
     //LISTAS
     public String[] listaClientes() {
@@ -157,7 +167,7 @@ public class ControladorFerreteria {
     public void saveVentas() throws FileNotFoundException{
         PrintStream pop= new PrintStream(new File("Ventas.txt"));
         ArrayList<DetalleVenta> detalleVentas;
-        for (Venta venta: ventas){
+        for (Venta venta: Ventas){
             pop.println(venta);
             detalleVentas = venta.getDetalleVentas();
             if(detalleVentas.size()>0){
@@ -170,7 +180,7 @@ public class ControladorFerreteria {
         pop.close();
     }
     public void readVentas() throws FileNotFoundException {
-        ventas.clear();
+        Ventas.clear();
         Scanner sc= new Scanner(new File("Ventas.txt"));
         String codigoVenta, fechaVenta, rutCliente, codigoProducto;
         int cantidad;
@@ -191,7 +201,7 @@ public class ControladorFerreteria {
                 venta.addProducto(producto,cantidad);
                 codigoProducto = sc.next();
             }
-            ventas.add(venta);
+            Ventas.add(venta);
         }
         sc.close();
     }
