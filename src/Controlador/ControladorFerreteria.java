@@ -180,6 +180,32 @@ public class ControladorFerreteria {
         }
         sc.close();
     }
+    public void saveClientes() throws FileNotFoundException{
+        PrintStream pop= new PrintStream(new File("Clientes.txt"));
+        for (Cliente cliente : Clientes){
+            pop.println(cliente);
+
+        }
+        pop.close();
+    }
+    public void readClientes() throws FileNotFoundException {
+        Clientes.clear();
+
+        Scanner sc= new Scanner(new File("Clientes.txt"));
+        String rut,nombre,direccion,telefono;
+        Cliente cliente;
+        sc.useDelimiter("\r\n|;");
+        sc.useLocale(Locale.UK);
+        while(sc.hasNext()){
+            rut= sc.next();
+            nombre = sc.next();
+            direccion = sc.next();
+            telefono= sc.next();
+            cliente= new Cliente(rut,nombre,direccion,telefono);
+            Clientes.add(cliente);
+        }
+        sc.close();
+    }
 
 
 }
