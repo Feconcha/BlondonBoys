@@ -82,7 +82,7 @@ public class ControladorFerreteria {
         int i=0;
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         for(Venta venta: Ventas){
-            listaVentas[i] = venta.getCliente().getRut() + ";" + venta.getCodigoVenta() + ";" + venta.getFechaVenta().format(formato) + ";" + venta.getVentas();
+            listaVentas[i] = venta.getCliente().getRut() + ";" + venta.getCodigoVenta() + ";" + venta.getFechaVenta().format(formato) + ";" + venta.getCantidadProductos();
             i++;
         }
         return listaVentas;
