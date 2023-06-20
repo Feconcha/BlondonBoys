@@ -6,6 +6,8 @@ import Modelo.Producto;
 import Modelo.Venta;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,22 +62,45 @@ public class UIFerreteria {
         System.out.println("Producto creado exitosamente.");
     }
     public void CrearVenta(){
-        String opcion;
+        String opcion="", fecha, rut;
         long codigo;
+        int cantidad;
+        Venta venta = null;
         System.out.println("Ingrese el rut del cliente");
-        String rut = scan.next();
-        Venta venta =controlador.creaVenta(rut);
+        rut = scan.next();
+        System.out.println("Ingrese fecha de la venta en formato dd/MM/yyyy");
+        fecha = scan.next();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaLD = LocalDate.parse(fecha,formato);
         do{
-            System.out.println("Ingrese el código del producto");
+            System.out.println("Ingrese el codigo del producto");
             codigo = scan.nextLong();
-            if(controlador.añadirVenta(codigo,venta)){
-                System.out.println("¿Quiere comprar mas productos? s/n");
-                opcion = scan.next();
+            System.out.println("Ingrese la cantidad que quiere llevar");
+            cantidad = scan.nextInt();
+            if(venta==null){
+                try {
+                    venta = controlador.creaVenta(codigo,rut,cantidad, fechaLD);
+                    System.out.println("¿Quiere comprar mas productos? s/n");
+                    opcion = scan.next();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }else{
-                System.out.println("No hay stock suficiente para ese producto");
-                opcion= "n";
+                if(controlador.añadirAVenta(codigo,venta,cantidad)){
+                    System.out.println("Producto ingresado exitosamente");
+                    System.out.println("¿Quiere comprar mas productos? s/n");
+                    opcion = scan.next();
+                }else{
+                    System.out.println("No hay suficiente stock para realizar la venta");
+                    System.out.println("¿Quiere comprar mas productos? s/n");
+                    opcion = scan.next();
+                }
+
             }
-        }while (opcion.equalsIgnoreCase("n"));
+        }while(opcion.equalsIgnoreCase("s"));
+        if(venta!=null){
+            printBoleta(venta);
+        }
     }
     //LISTAS
     public void ListaClientes() {
