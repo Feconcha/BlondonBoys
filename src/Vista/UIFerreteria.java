@@ -153,7 +153,7 @@ public class UIFerreteria {
             System.out.println("6.- Listar ventas");
             System.out.println("7.- Guardar Datos");
             System.out.println("8.- Leer Datos");
-            System.out.println("7.- Salir");
+            System.out.println("9.- Salir");
             System.out.println("Ingrese opción:");
             op = scan.nextInt();
 
@@ -165,42 +165,36 @@ public class UIFerreteria {
                     CrearProducto();
                     break;
                 case 3:
-
+                    CrearVenta();
                     break;
                 case 4:
                     ListaClientes();
                     break;
                 case 5:
                     ListaProductos();
-
                     break;
                 case 6:
+                    ListaVentas();
                     break;
                 case 7:
                     try {
                         controlador.saveClientes();
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                    try {
                         controlador.saveProductos();
+                        controlador.saveVentas();
+                        System.out.println("Datos guardados exitosamente");
                     } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
+                        System.out.println(e.getMessage());
                     }
-
                     break;
                 case 8:
                     try {
                         controlador.readClientes();
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                    try {
                         controlador.readProductos();
+                        controlador.readVentas();
+                        System.out.println("Datos leidos exitosamente");
                     } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
+                        System.out.println(e.getMessage());
                     }
-
                     break;
 
                 case 9:
