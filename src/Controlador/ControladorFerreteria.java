@@ -102,6 +102,7 @@ public class ControladorFerreteria {
     public String[] returnDatos(Venta venta){
         return venta.detalleVenta();
     }
+    //GetTotal para obtener el costo total
 
     public int getTotal(Venta venta){
         return venta.getMontoTotal();
