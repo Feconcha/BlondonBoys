@@ -36,16 +36,24 @@ public class ControladorFerreteria {
     public void creaProducto(long codigo, String marca, String descripcion, int precio, int stock){
         Productos.add(new Producto(codigo,marca,descripcion,precio,stock));
     }
-    public Venta creaVenta(long codProducto, long codVenta, String rut, int cantidad){
-        LocalDate fechaHoy = LocalDate.now();
+    public Venta creaVenta(long codProducto, String rut, int cantidad, LocalDate fecha) throws Exception {
         Cliente cliente = buscaCliente(rut);
-        long codigo = Ventas.size();
+        long codigo = ventas.size();
 
-        DetalleVenta detalleVenta = new DetalleVenta(cantidad,)
-
-        Venta venta = new Venta(codigo,fechaHoy,cliente);
-        Ventas.add(venta);
-        return venta;
+        if(cliente==null){
+            throw new Exception("No existe un cliente con el rut indicado");
+        }else{
+            Venta venta = new Venta(codigo, fecha, cliente);
+            Producto producto = buscaProducto(codProducto);
+            if(producto.getStock()>=cantidad){
+                ventas.add(venta);
+                venta.addProducto(producto, cantidad);
+                producto.setStock(producto.getStock()-cantidad);
+                return venta;
+            }else{
+                throw new Exception("No hay suficiente stock del producto");
+            }
+        }
     }
     public String[] listaClientes() {
         String [] listaClientes = new String[Clientes.size()];
