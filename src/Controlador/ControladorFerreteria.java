@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.Cliente;
+import Modelo.DetalleVenta;
 import Modelo.Producto;
 import Modelo.Venta;
 
@@ -152,6 +153,21 @@ public class ControladorFerreteria {
             Productos.add(producto);
         }
         sc.close();
+    }
+    public void saveVentas() throws FileNotFoundException{
+        PrintStream pop= new PrintStream(new File("Ventas.txt"));
+        ArrayList<DetalleVenta> detalleVentas;
+        for (Venta venta: ventas){
+            pop.println(venta);
+            detalleVentas = venta.getDetalleVentas();
+            if(detalleVentas.size()>0){
+                for(DetalleVenta detalleVenta: detalleVentas){
+                    pop.println(detalleVenta);
+                }
+                pop.println("*");
+            }
+        }
+        pop.close();
     }
 
 }
