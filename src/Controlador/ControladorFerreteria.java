@@ -33,6 +33,7 @@ public class ControladorFerreteria {
         }
         return instance;
     }
+    //CREAR
     public void creaCliente(String rut, String nombre, String direccion, String telefono){
         Clientes.add(new Cliente(rut,nombre,direccion,telefono));
     }
@@ -126,6 +127,7 @@ public class ControladorFerreteria {
         }
         return null;
     }
+    //GUARDAR Y LEER DATOS
     public void saveClientes() throws FileNotFoundException{
         PrintStream pop= new PrintStream(new File("Clientes.txt"));
         for (Cliente cliente : Clientes){
