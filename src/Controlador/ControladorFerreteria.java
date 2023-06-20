@@ -87,12 +87,14 @@ public class ControladorFerreteria {
         }
         return listaVentas;
     }
-    public boolean añadirVenta(Long codigo, Venta venta){
+    public boolean añadirAVenta(long codigo, Venta venta, int cantidad){
         Producto producto = buscaProducto(codigo);
-        if(producto.getStock()>0){
-            venta.addProductos(producto);
-            producto.setStock(producto.getStock()-1);
-            return true;
+        if(producto!=null){
+            if(producto.getStock()>=cantidad){
+                venta.addProducto(producto, cantidad);
+                producto.setStock(producto.getStock()-cantidad);
+                return true;
+            }
         }
         return false;
     }
