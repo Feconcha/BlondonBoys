@@ -1,37 +1,94 @@
 package Modelo;
 
-import javax.lang.model.type.DeclaredType;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Venta {
     private long codigoVenta;
-    private String fechaVenta;
+    private LocalDate fechaVenta;
     private Cliente cliente;
-    private ArrayList<DetalleVenta> DetalleVenta;
+    private ArrayList<DetalleVenta>detalleVentas;
 
-    public Venta(long codigoVenta, String fechaVenta, Cliente cliente, ArrayList<DetalleVenta> detalleVenta) {
+    public Venta(long codigoVenta, LocalDate fechaVenta, Cliente cliente) {
         this.codigoVenta = codigoVenta;
         this.fechaVenta = fechaVenta;
         this.cliente = cliente;
-        DetalleVenta = detalleVenta;
+        detalleVentas = new ArrayList<>();
     }
 
-    public void dibujaFactura(){
-        System.out.println("Codigo de factira: "+codigoVenta);
-        System.out.println("Nombre del cliente: "+cliente.toString());
-        System.out.println("Fecha de venta: "+fechaVenta);
-        System.out.println("El detalle de lo vendido es: ");
-        int acumulado=0;
+    public long getCodigoVenta() {
+        return codigoVenta;
+    }
 
-        for (DetalleVenta detalle : DetalleVenta){
-            Producto aux=detalle.getProducto();
-            int totalLinea = aux.getPrecio()*detalle.getCantidad();
-            System.out.println("Cantidad: "+detalle.getCantidad()+" "+aux.getDescripcion()+"total: "+totalLinea);
-            acumulado=acumulado+totalLinea;
+    public void setCodigoVenta(long codigoVenta) {
+        this.codigoVenta = codigoVenta;
+    }
+
+    public LocalDate getFechaVenta() {
+        return fechaVenta;
+    }
+
+    public void setFechaVenta(LocalDate fechaVenta) {
+        this.fechaVenta = fechaVenta;
+    }
+
+    public void addProducto(Producto producto, int cantidad){
+        DetalleVenta venta = new DetalleVenta(cantidad,this,producto);
+        detalleVentas.add(venta);
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public ArrayList<DetalleVenta> getDetalleVentas(){
+        return detalleVentas;
+    }
+
+    public int getMontoTotal(){
+        int monto=0;
+        for(DetalleVenta detalleVenta : detalleVentas){
+            monto+= detalleVenta.getProducto().getPrecio()*detalleVenta.getCantidad();
         }
-        System.out.println("Total NETO: "+acumulado);
-        double iva=acumulado*0.19;
-        System.out.println("IVA: "+iva);
-        System.out.println("Valor total: "+(acumulado+iva));
+        return monto;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public int getCantidadProductos(){
+        int cont=0;
+        for(int i=0; i<detalleVentas.size(); i++){
+            cont+=detalleVentas.get(i).getCantidad();
+        }
+        return cont;
+    }
+
+    //
+    public Producto[] getProductos(){
+        ArrayList<Producto> productos = new ArrayList<>();
+        for(DetalleVenta detalleVenta: detalleVentas){
+            if(detalleVenta.getProducto()!=null){
+                productos.add(detalleVenta.getProducto());
+            }
+        }
+        return productos.toArray(new Producto[0]);
+    }
+
+    public String[] detalleVenta(){
+        String[] listaVenta = new String[detalleVentas.size()];
+        for(int i=0; i<listaVenta.length; i++){
+            Producto producto = detalleVentas.get(i).getProducto();
+            listaVenta[i] = detalleVentas.get(i).getCantidad() + ";" + producto.getDescripcion() + ";" + producto.getPrecio() + ";" + (detalleVentas.get(i).getCantidad()*producto.getPrecio());
+        }
+        return listaVenta;
+    }
+
+    public String toString(){
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return codigoVenta + ";" + cliente.getRut() + ";" + fechaVenta.format(formato);
     }
 }
