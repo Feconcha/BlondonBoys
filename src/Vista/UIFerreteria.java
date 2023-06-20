@@ -123,6 +123,21 @@ public class UIFerreteria {
             System.out.printf("%1$-18s%2$-30s%3$-35s%4$-12s%n", datos[0], datos[1], datos[2], datos[3]);
         }
     }
+    public void printBoleta(Venta venta){
+        String [] datos;
+        String [] listaDatos = controlador.returnDatos(venta);
+        System.out.println("-------------------------------------  BOLETA DE VENTA  -------------------------------------");
+        System.out.println("FECHA VENTA -> " + venta.getFechaVenta());
+        System.out.println("CODIGO VENTA -> " + venta.getCodigoVenta());
+        System.out.println("--------------------------------------------------------------------------------------------");
+        System.out.printf("%1$-10s%2$-30s%3$-20s%4$-20s%n", "Cantidad", "Descripción","Precio unitario","Valor venta");
+        for(int i=0; i<listaDatos.length;i++){
+            datos = listaDatos[i].split(";");
+            System.out.printf("%1$-10s%2$-30s%3$-20s%4$-20s%n", datos[0], datos[1], datos[2], datos[3]);
+        }
+        System.out.println("MONTO TOTAL -> $" + controlador.getTotal(venta));
+        System.out.println("--------------------------------------------------------------------------------------------");
+    }
 
     public void menu() {
         int op;
